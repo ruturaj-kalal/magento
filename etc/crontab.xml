@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job name="firework_clean_completed_webhooks" method="execute" instance="Firework\Firework\Cron\Clean">
+			<schedule>* 23 * * *</schedule>
+		</job>
+		<job name="firework_sync_webhooks" method="execute" instance="Firework\Firework\Cron\Sync">
+			<schedule>* * * * *</schedule>
+		</job>
+	</group>
+</config>
+

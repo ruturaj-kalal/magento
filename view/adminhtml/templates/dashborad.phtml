@@ -1,0 +1,24 @@
+<iframe id="fw-iframe" 
+        src="<?= /* @noEscape */ $block->setIframeSrc() ?>" 
+        style="width: 100%; border: none; height: 800px;">
+</iframe>
+
+<script type="text/javascript">
+    function postTokenToIFrame() {
+        var iframeWin = document.getElementById("fw-iframe").contentWindow;
+        const message = {
+        token: "<?= /* @noEscape */ $block->getAccessToken() ?>",
+        oauthApp: "<?= /* @noEscape */ $block->setOauthApp() ?>",
+        locale: "",
+        businessStoreId: "<?= /* @noEscape */ $block->getBussinessStoreId() ?>",
+        businessId: "<?= /* @noEscape */ $block->getBussinessId() ?>"
+        }
+        iframeWin.postMessage(message,
+        "<?= /* @noEscape */ $block->setIframeSrc() ?>");
+    }const handleMessage = (e) => {
+    if (e.data === "fwIntegrationReady") {
+        postTokenToIFrame();
+        }
+    }
+    window.addEventListener('message', handleMessage, false)
+</script>

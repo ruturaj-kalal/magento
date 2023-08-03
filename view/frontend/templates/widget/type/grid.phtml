@@ -1,0 +1,21 @@
+<?php
+$data = $block->getData();
+$channel = $data['channel'];
+$playlist = (isset($data['playlist'])) ? $data['playlist'] : '';
+$paginateBy = "10";
+$playerPlacement = (isset($data['settings']['grid']['position'])) ? $data['settings']['grid']['position'] : '';
+?>
+<!-- Embed a Channel in Grid format -->
+<?php if (isset($data['channel']) && isset($data['type'])): ?>
+    <script async src="//asset.fwcdn3.com/js/embed-feed.js"></script>
+    <script async type='text/javascript' src="//asset.fwcdn3.com/js/integrations/magento.js"></script>
+    <?php /* <script async src="<?= $block->getViewFileUrl('Firework_Firework::js/embed-feed.js'); ?>"></script> */ ?>
+    <fw-embed-feed 
+        channel="<?= /* @noEscape */ $channel ?>"
+        <?= ($playlist && $playlist != "all") ? 'playlist="' . /* @noEscape */ $playlist . '"' : '' ?>
+        mode="grid"
+        paginate_by="<?= /* @noEscape */ $paginateBy ?>"
+	    player_placement="<?= /* @noEscape */ $playerPlacement; ?>"
+        >
+    </fw-embed-feed>
+<?php endif; ?>

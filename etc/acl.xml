@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+   <acl>
+     <resources>
+        <resource id="Magento_Backend::admin">
+           <resource id="Firework_Firework::firework" title="FireWork" sortOrder="10" >
+              <resource id="Firework_Firework::firework_dashboard" title="FireWork Dashboard" sortOrder="50" />
+              <resource id="Firework_Firework::firework_configuration" title="FireWork Configuration" sortOrder="100" />
+              <resource id="Firework_Firework::firework_webhook" title="FireWork Webhook" sortOrder="150" />
+           </resource>
+        </resource>
+     </resources>
+   </acl>
+</config>

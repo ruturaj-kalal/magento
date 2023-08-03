@@ -1,0 +1,23 @@
+<?php
+$data = $block->getData();
+$channel = $data['channel'];
+$playlist = (isset($data['playlist'])) ? $data['playlist'] : '';
+$playerPlacement = (isset($data['settings']['floating_player']['position'])) ?
+$data['settings']['floating_player']['position'] : '';
+?>
+<!-- Embed a Channel in Floating Player -->
+<?php if (isset($data['channel']) && isset($data['type'])): ?>
+    <script async src='//asset.fwcdn3.com/js/storyblock.js'></script>
+    <script async src="//asset.fwcdn3.com/js/integrations/magento.js"></script>
+    <?php /*
+    <script async src="<?= $block->getViewFileUrl('Firework_Firework::js/storyblock.js'); ?>"></script> */
+    ?>
+    <fw-storyblock
+        channel="<?= /* @noEscape */ $channel ?>"
+        <?= ($playlist && $playlist != "all") ? 'playlist="' . /* @noEscape */ $playlist . '"' : '' ?>
+        mode="pinned"
+        autoplay="true"
+	    player_placement="<?= /* @noEscape */ $playerPlacement; ?>"
+        >
+    </fw-storyblock>
+<?php endif; ?>

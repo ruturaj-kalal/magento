@@ -1,0 +1,136 @@
+<?php
+
+$values = $block->getElementValues();
+$typeValue = isset($values['type']) ? $values['type'] : 'story_block';
+$channel = (isset($values['channel'])) ? $values['channel'] : '';
+$playlist = (isset($values['playlist'])) ? $values['playlist'] : '';
+
+?>
+<div class="firework" id="firework-widget" >
+    <h1><?= /* @noEscape */ __('Layout Selection') ?></h1>
+    <p>
+        <?= /* @noEscape */ __('Please choose how you would like your videos to
+        be displayed by picking one of the layout optins below.') ?>
+    </p>
+    <div id="firework_element">
+        <ul class="tabs-horiz types" >
+            <?php foreach ($block->getTypes() as $type): ?>
+                <li>
+                    <div class="title" for="firework_<?= /* @noEscape */ $type['value'] ?>">
+                        <span><?= /* @noEscape */ $type['label'] ?></span>                                
+                    </div>
+                    <div class="control">                                
+                        <input
+                            type="radio"
+                            class="type"
+                            id="firework_<?= /* @noEscape */ $type['value'] ?>"
+                            name="parameters[data][type]"
+                            value="<?= /* @noEscape */ $type['value'] ?>"
+                            <?= ($typeValue == $type['value']) ? "checked" : '' ?>
+                        />
+                    </div>
+                    <a
+                        href="#<?= /* @noEscape */ $type['value'] ?>_content"
+                        id="<?= /* @noEscape */ $type['value'] ?>_title">
+                        <span>
+                            <img
+                                src="<?= /* @noEscape */ $block->getViewFileUrl('Firework_Firework::images/video/type/'.
+                                $type['value'].'.png'); ?>"
+                                alt="<?= /* @noEscape */ $type['label'] ?>"
+                            />
+                        </span>
+                    </a>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div id="firework_element_channel" data-bind="scope: 'fireworkVideos'" data-mage-init='{"Magento_Ui/js/core/app": {
+       "components": {
+            "fireworkVideos": {
+                "component": "Firework_Firework/js/firework-component",
+                "channelConfig": <?= /* @noEscape */ json_encode($block->getChannelConfig(), JSON_HEX_APOS) ?>,
+                "configValues": {
+                    "channel" : "<?= /* @noEscape */ isset($values['channel']) ? $values['channel'] : ''; ?>", 
+                    "playlist" : "<?= /* @noEscape */ isset($values['playlist']) ? $values['playlist'] : 'all'; ?>",
+                    "video" : "<?= /* @noEscape */ isset($values['video']) ? $values['video'] : ''; ?>",
+                    "videosUrl" : "<?= /* @noEscape */ $block->getUrl('firework/widget/loadVideos') ?>"
+                },
+                "tabsConfig": {
+                    "active": "<?= /* @noEscape */ $typeValue ?>",
+                    "destination": "#firework_element_content",
+                    "shadowTabs": []
+                }
+            }
+        }
+    }}'>
+        <div class="channel_field">
+            <div class="field" >
+                <label><?= /* @noEscape */ __('Channel') ?></label>
+                <div class="control">                
+                    <select
+                        data-bind="options: channelsDropdown,
+                        optionsText: 'label',
+                        optionsValue: 'value',
+                        optionsCaption: 'Select your channel',
+                        value: selectedChannel"
+                        name="parameters[data][channel]"
+                        class="required-entry">
+                    </select>
+                </div>
+            </div>
+            <div class="field">
+                <label><?= /* @noEscape */ __('Playlist') ?></label>
+                <div class="control">                
+                    <select data-bind="options: playlistsDropdown,
+                            optionsText: 'label',
+                            optionsValue: 'value',
+                            value: selectedPlaylist"
+                            name="parameters[data][playlist]">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="channel_videos"></div>
+    </div>
+    <div id="firework_element_content">
+        <?php foreach ($block->getTypes() as $type): ?>
+            <div id="<?= /* @noEscape */ $type['value'] ?>_content" >
+                <?= $block->getLayout()
+                        ->createBlock(\Magento\Framework\View\Element\Template::class)
+                        ->setValues($values)
+                        ->setTemplate("Firework_Firework::widget/type/". $type['value'] .".phtml")
+                        ->toHtml();
+                ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+    
+</div>
+<script>
+require([
+    "jquery", 
+    "ko", 
+    "mage/backend/tabs"
+], function($, ko){
+    $(function() {
+        $('#firework_element').tabs({
+            active: '<?= /* @noEscape */ $typeValue ?>_title',  // active tab element id
+            destination: '#firework_element_content', // tab content destination element id
+            shadowTabs: []       
+        });
+        $(".ui-tabs-anchor").click(function(){
+            var selectedType = $(this).prev().children().attr('id');
+            $('#'+selectedType).prop("checked", true).trigger('change');
+        });
+
+    });
+    $('.firework-widget-data').closest('.admin__field.field').addClass("firework-widget-data-field");
+
+    <?php if ($block->getRequest()->getParam('isAjax')): ?>
+        $('#firework_element_channel').trigger('contentUpdated');
+        setTimeout(function(){
+            ko.applyBindings('Firework_Firework/js/firework-component', $('#firework_element_channel')[0]);
+        },1000);
+    <?php endif; ?>
+});
+</script>

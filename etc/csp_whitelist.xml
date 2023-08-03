@@ -1,0 +1,45 @@
+<?xml version = "1.0"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp/etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="script-src">
+            <values>
+                <value id="asset-fwcdn1-main" type="host">asset.fwcdn1.com</value>
+                <value id="asset-fwcdn1-sub" type="host">*.asset.fwcdn1.com</value>
+                <value id="asset-fwcdn3-main" type="host">asset.fwcdn3.com</value>
+                <value id="asset-fwcdn3-sub" type="host">*.asset.fwcdn3.com</value>
+                <value id="asset-fwcdn2-main" type="host">asset.fwcdn2.com</value>
+                <value id="asset-fwcdn2-sub" type="host">*.asset.fwcdn2.com</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="p2-fwpixel-main" type="host">p2.fwpixel.com</value>
+                <value id="p2-fwpixel-sub" type="host">*.p2.fwpixel.com</value>
+                <value id="fireworkapi1-main" type="host">fireworkapi1.com</value>
+                <value id="fireworkapi1-sub" type="host">*.fireworkapi1.com</value>
+                <value id="fireworkadservices1-main" type="host">fireworkadservices1.com</value>
+                <value id="fireworkadservices1-sub" type="host">*.fireworkadservices1.com</value>
+                <value id="fireworkanalytics-main" type="host">fireworkanalytics.com</value>
+                <value id="fireworkanalytics-sub" type="host">*.fireworkanalytics.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="asset-fwcdn2-main" type="host">asset.fwcdn2.com</value>
+                <value id="asset-fwcdn2-sub" type="host">*.asset.fwcdn2.com</value>
+                <value id="asset-fwcdn1-main" type="host">asset.fwcdn1.com</value>
+                <value id="asset-fwcdn1-sub" type="host">*.asset.fwcdn1.com</value>
+                <value id="fireworktv-main" type="host">fireworktv.com</value>
+                <value id="fireworktv-sub" type="host">*.fireworktv.com</value>
+                <value id="p2-fwpixel-main" type="host">p2.fwpixel.com</value>
+                <value id="p2-fwpixel-sub" type="host">*.p2.fwpixel.com</value>
+			</values>
+        </policy>
+        <policy id="media-src">
+            <values>
+                <value id="cdn4-fireworktv-main" type="host">cdn4.fireworktv.com</value>
+                <value id="cdn4-fireworktv-sub" type="host">*.cdn4.fireworktv.com</value>
+			</values>
+        </policy>
+    </policies>
+</csp_whitelist>

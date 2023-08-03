@@ -1,0 +1,34 @@
+<?php
+   $order = $block->getOrder();
+?>
+<?php if ($order): ?>
+    <?php
+    $products = [];
+    foreach ($order->getAllVisibleItems() as $item) {
+        $products[] = [
+            'product_id' => $item->getProduct()->getId(),
+            'price' => $item->getPrice(),
+            'quantity' => $item->getQtyOrdered()
+        ];
+    }
+    ?>
+
+    <script>
+        function onFwAnalyticsScriptLoaded() { 
+            var payload = {
+                order_id: <?= /* @noEscape */ $order->getId() ?>,
+                order_value: <?= /* @noEscape */ $order->getGrandTotal() ?>,
+                order_number: '<?= /* @noEscape */ $order->getIncrementId() ?>',
+                currency: '<?= /* @noEscape */ $order->getOrderCurrencyCode() ?>',
+                country: '<?= /* @noEscape */ $order->getShippingAddress()->getCountryId() ?>',
+                subtotal: <?= /* @noEscape */ $order->getsubTotal() ?>,
+                shipping_price: <?= /* @noEscape */ $order->getShippingAmount() ?>,
+                payment_method: '<?= /* @noEscape */ $order->getPayment()->getMethodInstance()->getTitle() ?>',
+                cc_last4: '<?= /* @noEscape */ $order->getPayment()->getCcLast4() ?>',
+                products: <?= /* @noEscape */ json_encode($products); ?>
+            }
+	    window._fwn.analytics.purchase(payload)
+        }
+    </script>
+    <script onload="onFwAnalyticsScriptLoaded()" src="//asset.fwcdn3.com/js/analytics.js"></script>
+<?php endif; ?>

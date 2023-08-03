@@ -1,0 +1,23 @@
+<?php
+    json_decode($block->getData('data'));
+if (json_last_error() === JSON_ERROR_NONE) {
+    $data = json_decode($block->getData('data'), 1);
+} else {
+    $data = json_decode(
+        str_replace(
+            ['[',']','`'],
+            ['{','}','"'],
+            html_entity_decode($this->getData('data'))
+        ), 1);
+}
+?>
+
+<?php if (isset($data['channel']) && isset($data['type'])): ?>
+    <?php
+        echo $this->getLayout()
+                  ->createBlock('Magento\Framework\View\Element\Template')
+                  ->setData($data)
+                  ->setTemplate("Firework_Firework::widget/type/" . $data['type'] . ".phtml")
+                  ->toHtml();
+    ?>
+<?php endif; ?>

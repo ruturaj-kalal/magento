@@ -1,0 +1,22 @@
+<?php
+$data = $block->getData();
+$channel = $data['channel'];
+$playlist = (isset($data['playlist'])) ? $data['playlist'] : '';
+$playerPlacement = (isset($data['settings']['carausel']['position'])) ? $data['settings']['carausel']['position'] : '';
+?>
+<!-- Carousel Format -->
+<?php if (isset($data['channel']) && isset($data['type'])): ?>
+    <script async src="//asset.fwcdn3.com/js/embed-feed.js"></script>
+    <script async type='text/javascript' src="//asset.fwcdn3.com/js/integrations/magento.js"></script>
+    
+    <?php /*<script async src="<?= $block->getViewFileUrl('Firework_Firework::js/embed-feed.js'); ?>"></script> */ ?>
+    <fw-embed-feed
+        channel="<?= /* @noEscape */ $channel ?>"
+        open_in="default"
+        max_videos="0"
+        <?= ($playlist && $playlist != "all") ? 'playlist="' . /* @noEscape */ $playlist . '"' : '' ?>
+        mode="row"
+        autoplay="true"
+        player_placement="<?= /* @noEscape */ $playerPlacement; ?>">
+    </fw-embed-feed>
+<?php endif; ?>

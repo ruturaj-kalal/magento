@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Widget\Model\Widget\Instance">
+        <plugin name="customise_firework_wodget_value" sortOrder="10" type="Firework\Firework\Plugin\Model\Widget\Instance" disabled="false" />
+    </type>
+    <preference for="Magento\Widget\Model\Widget" type="Firework\Firework\Model\Widget" />
+
+    <virtualType name="FWWebhookFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Firework\Firework\Model\ResourceModel\Webhook\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">FWWebhookFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="firework_webhook_list_data_source" xsi:type="string">Firework\Firework\Model\ResourceModel\Webhook\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Firework\Firework\Model\ResourceModel\Webhook\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">firework_webhook</argument>
+            <argument name="resourceModel" xsi:type="string">Firework\Firework\Model\ResourceModel\Webhook</argument>
+        </arguments>
+    </virtualType>
+    <type name="Firework\Firework\Ui\Component\MassAction\Status\Options">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="urlPath" xsi:type="string">firework/webhook/massstatus</item>
+                <item name="paramName" xsi:type="string">status</item>               
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Checkout\CustomerData\Cart">
+        <plugin name="firework_mage_cache_storage" sortOrder="10" type="Firework\Firework\Plugin\Checkout\CustomerData\Cart" disabled="false" />
+    </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order_operation" type="Firework\Firework\Plugin\AfterOrderComplete"/>
+    </type>
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="mask_id_set_cart" type="Firework\Firework\Plugin\CartRepositoryPlugin" sortOrder="1"/>
+    </type>
+</config>

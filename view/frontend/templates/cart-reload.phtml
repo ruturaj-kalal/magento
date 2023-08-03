@@ -1,0 +1,36 @@
+<script type="text/javascript">
+require([
+    'jquery',
+    'Magento_Customer/js/customer-data'
+], function ($, customerData) {
+	$(document).ready(function(){
+		var fireworkItemAdded = getCookie('firework_item_added');
+		if(!fireworkItemAdded){			
+			var interval = setInterval(function(){
+				fireworkItemAdded = getCookie('firework_item_added');
+
+				if(fireworkItemAdded){
+					var sections = ['cart'];
+				    customerData.invalidate(sections);
+				    customerData.reload(sections, true);
+
+				    clearInterval(interval);
+				}
+			},1000);
+		}
+	});	
+
+	function getCookie(name) {
+	    var nameEQ = encodeURIComponent(name) + "=";
+	    var ca = document.cookie.split(';');
+	    for (var i = 0; i < ca.length; i++) {
+	        var c = ca[i];
+	        while (c.charAt(0) === ' ')
+	            c = c.substring(1, c.length);
+	        if (c.indexOf(nameEQ) === 0)
+	            return decodeURIComponent(c.substring(nameEQ.length, c.length));
+	    }
+	    return null;
+	}
+});
+</script>

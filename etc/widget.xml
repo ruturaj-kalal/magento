@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:helloworld:Magento_Widget:etc/widget.xsd">
+	<widget class="Firework\Firework\Block\Widget\Video" id="firework_videos">
+		<label>Firework Videos</label>
+		<description>Firework videos by channel</description>
+		<parameters>
+			<parameter xsi:type="block" name="data" visible="true" sort_order="10">
+			    <label translate="true">Data</label>
+			    <block class="Firework\Firework\Block\Adminhtml\Widget\Data" />
+			</parameter>
+		</parameters>
+	</widget>
+</widgets>

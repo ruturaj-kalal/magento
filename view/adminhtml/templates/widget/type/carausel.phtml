@@ -1,0 +1,62 @@
+<?php
+$values = $block->getValues();
+$settings = (isset($values['settings']['carausel'])) ? $values['settings']['carausel'] : [] ;
+$placement = (isset($settings['position'])) ? $settings['position'] : '';
+?>
+<div class="carausel">
+    <div class="placement">
+        <div class="field">
+            <label class="option-title">
+                <?= /* @noEscape */ __("Minimized video player location") ?>
+            </label>
+            <div class="control">
+                <ul class="field-options">
+                    <li>
+                        <input
+                            type="radio"
+                            id="carausel-position-bottom_right"
+                            name="parameters[data][settings][carausel][position]"
+                            value="bottom-right" <?= ($placement == 'bottom_right') ? "checked" : '' ?>
+                        />
+                        <label for="carausel-position-bottom_right">
+                            <?= /* @noEscape */ __('Bottom Right') ?>
+                        </label>
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            id="carausel-position-bottom_left"
+                            name="parameters[data][settings][carausel][position]"
+                            value="bottom-left" <?= ($placement == 'bottom_left') ? "checked" : ''?>
+                        />
+                        <label for="carausel-position-bottom_left">
+                            <?= /* @noEscape */ __('Bottom Left') ?>
+                        </label>
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            id="carausel-position-top_right"
+                            name="parameters[data][settings][carausel][position]"
+                            value="top-right" <?= ($placement == 'top_right') ? "checked" : '' ?>
+                        />
+                        <label for="carausel-position-top_right">
+                            <?= /* @noEscape */ __('Top Right') ?>
+                        </label>
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            id="carausel-position-top_left"
+                            name="parameters[data][settings][carausel][position]"
+                            value="top-left" <?= ($placement == 'top_left') ? "checked" : '' ?>
+                        />
+                        <label for="carausel-position-top_left">
+                            <?= /* @noEscape */ __('Top Left') ?>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

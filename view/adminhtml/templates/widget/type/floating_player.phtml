@@ -1,0 +1,61 @@
+<?php
+$values = $block->getValues();
+$settings = (isset($values['settings']['floating_player'])) ? $values['settings']['floating_player'] : [] ;
+$placement = (isset($settings['position'])) ? $settings['position'] : '';
+?>
+
+<div class="floating_player">
+    <div class="placement">
+        <div class="field">
+            <label class="option-title"><?= /* @noEscape */ __("Player Placements") ?></label>
+            <div class="control">
+                <ul class="field-options">
+                    <li>
+                        <input
+                            type="radio"
+                            id="floating_player-position-bottom_right"
+                            name="parameters[data][settings][floating_player][position]"
+                            value="bottom-right" <?= ($placement == 'bottom_right') ? "checked" : '' ?>
+                        />
+                        <label for="floating_player-position-bottom_right">
+                            <?= /* @noEscape */ __('Bottom Right') ?>
+                        </label>
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            id="floating_player-position-bottom_left"
+                            name="parameters[data][settings][floating_player][position]"
+                            value="bottom-left" <?= ($placement == 'bottom_left') ? "checked" : '' ?>
+                        />
+                        <label for="floating_player-position-bottom_left">
+                            <?= /* @noEscape */ __('Bottom Left') ?>
+                        </label>
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            id="floating_player-position-top_right"
+                            name="parameters[data][settings][floating_player][position]"
+                            value="top-right" <?= ($placement == 'top_right') ? "checked" : '' ?>
+                        />
+                        <label for="floating_player-position-top_right">
+                            <?= /* @noEscape */ __('Top Right') ?>
+                        </label>
+                    </li>
+                    <li>
+                        <input
+                            type="radio"
+                            id="floating_player-position-top_left"
+                            name="parameters[data][settings][floating_player][position]"
+                            value="top-left" <?= ($placement == 'top_left') ? "checked" : '' ?>
+                        />
+                        <label for="floating_player-position-top_left">
+                            <?= /* @noEscape */ __('Top Left') ?>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © 2021 Tz TazaPay Development Inc. All rights reserved.
+ * See LICENSE for license details.
+ */
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <firework>
+            <general>
+                <enable>0</enable> 
+                <integration_token></integration_token>
+                <business_store_id></business_store_id>
+                <business_id></business_id>
+            </general>
+            <webhook>
+                <enable>1</enable>
+                <endpoint>https://fireworktv.com/integration/magento/webhook/</endpoint>
+                <bulk_size>50</bulk_size>
+                <log_clean_days>7</log_clean_days>
+            </webhook>
+            <tracking>
+                <enable>0</enable>
+            </tracking>
+        </firework>
+        <payment>
+            <firework>
+                <active>1</active>
+                <model>Firework\Firework\Model\PaymentMethod</model>
+                <order_status>pending</order_status>
+                <title>Firework</title>
+                <allowspecific>0</allowspecific>
+                <group>offline</group>
+            </firework>
+        </payment>
+    </default>
+</config>

@@ -1,0 +1,33 @@
+<?php
+$videos = $block->getVideos();
+$selectedVideoId = $block->getSelectedVideo();
+?>
+<div class="channel_videos <?= ($block->getPlaylist() == "specific") ? 'specific-videos' : '' ?>">
+    <?php if (count($videos)): ?>
+        <ul>
+            <?php foreach ($videos as $key => $video): ?>
+                <li>
+                    <div class="video_detail">                        
+                        <input
+                            type="radio"
+                            class="channel_video_id"
+                            id="firework_video_<?= /* @noEscape */ $video['encoded_id'] ?>"
+                            name="parameters[data][video]"
+                            value="<?= /* @noEscape */ $video['encoded_id'] ?>"
+                            <?= /* @noEscape */ ($selectedVideoId == $video['encoded_id']) ? 'checked' : '' ?>
+                        />
+                        <img
+                            src="<?= /* @noEscape */ $video['thumbnail_url'] ?>"
+                            alt="<?= /* @noEscape */ $video['caption'] ?>"
+                        />
+                        <span class="caption">
+                            <?= /* @noEscape */ $video['caption'] ?>
+                        </span>
+                    </div>
+                </li>
+            <?php endforeach ?>
+        </ul>
+    <?php else: ?>
+        <p><?= /* @noEscape */ __("No any video found for your applied filters") ?></p>
+    <?php endif; ?>
+</div>

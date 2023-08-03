@@ -1,0 +1,24 @@
+<?php
+$data = $block->getData();
+$channel = $data['channel'];
+$playlist = (isset($data['playlist'])) ? $data['playlist'] : '';
+$video = (isset($data['video'])) ? $data['video'] : '';
+$playerPlacement = (isset($data['settings']['story_block']['position'])) ?
+$data['settings']['story_block']['position'] : '';
+?>
+<!-- Embed a Channel in Story Block format -->
+<?php if (isset($data['channel']) && isset($data['type'])): ?>
+    <script async type='text/javascript'src='//asset.fwcdn3.com/js/storyblock.js'></script>
+    <script async type='text/javascript' src="//asset.fwcdn3.com/js/integrations/magento.js"></script>
+    <!-- <script async type='text/javascript' src="//zeffo-git-com-1554-3-firework.vercel.app/js/integrations/magento.js"></script> -->
+    <?php /* <script async src="<?= $block->getViewFileUrl('Firework_Firework::js/storyblock.js'); ?>"></script> */ ?>
+    <fw-storyblock
+        channel="<?= /* @noEscape */ $channel ?>"
+        <?= ($playlist && $playlist != "all") ? 'playlist="' . /* @noEscape */ $playlist . '"' : '' ?>
+        autoplay="true"
+        <?= /* @noEscape */ ($video) ? 'video="'.$video.'"' : '' ?>
+        max_videos="0"
+	    player_placement="<?= /* @noEscape */ $playerPlacement; ?>"
+        >
+    </fw-storyblock>
+<?php endif;?>

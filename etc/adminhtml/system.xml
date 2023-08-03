@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="firework" translate="label" sortOrder="10">
+            <label>FireWork</label>
+        </tab>
+        <section id="firework" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>FireWork</label>
+            <tab>firework</tab>
+            <resource>Firework_Firework::firework_configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable / Disable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                
+                <!-- OAuth User Token -->
+                <field id="integration_token" translate="label" sortOrder="20" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Integration</label>
+                    <comment><![CDATA[Please select the Integration]]></comment>
+                    <config_path>firework/firework/integration_token</config_path>
+                    <source_model>Firework\Firework\Model\Config\Source\Integration</source_model>
+                    <validate>required-entry</validate>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+                <!-- Json Response -->
+                <field id="json_response" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1"></field>
+
+                <!-- Redirect Uris -->
+                <field id="redirect_uris" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1"></field>
+
+                <!-- Access Token -->
+                <field id="access_token" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1"></field>
+
+                <!-- Refresh Token -->
+                <field id="refresh_token" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1"></field>
+
+                <!-- Business Store Id -->
+                <field id="business_store_id" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1"></field>
+
+                <!-- Business ID -->
+                <field id="business_id" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1"></field>
+
+                <!-- Connect Button -->
+                <field id="connect_button" translate="label comment" type="button" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Firework\Firework\Block\Adminhtml\System\Config\ConnectButton</frontend_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+                <!-- Reset Business Button -->
+                <field id="reset_business_button" translate="label comment" type="button" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <frontend_model>Firework\Firework\Block\Adminhtml\System\Config\ResetBusiness</frontend_model>
+                    <depends>
+                        <field id="enable">1</field>
+                    </depends>
+                </field>
+
+            </group>
+            <group id="webhook" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Webhook Configuration</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable / Disable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>                
+                <field id="endpoint" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Endpoint URL</label>
+                    <validate>required-entry validate-url</validate>
+                </field>
+                <field id="bulk_size" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>CRON bulk size</label>
+                    <validate>required-entry validate-number</validate>
+                </field>
+                <field id="log_clean_days" translate="label" sortOrder="20" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Clean log after days</label>
+                    <validate>required-entry validate-number</validate>
+                </field>
+            </group>
+            <group id="tracking" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Purchaes Tracking</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable / Disable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>               
+            </group>
+        </section>
+        <section id="payment" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1000" translate="label">
+            <group id="firework" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+				<label>Firework</label>
+				<field id="active" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label" type="select">
+					<label>Enabled</label>
+                    <frontend_model>Firework\Firework\Model\System\Config\Disable</frontend_model>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="title" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label" type="text">
+					<label>Title</label>
+				</field>
+				<field id="order_status" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label" type="select">
+					<label>New Order Status</label>
+					<source_model>Magento\Sales\Model\Config\Source\Order\Status\NewStatus</source_model>
+				</field>
+				<field id="allowspecific" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="40" translate="label" type="allowspecific">
+					<label>Payment from Applicable Countries</label>
+					<source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+				</field>
+				<field id="specificcountry" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="multiselect">
+					<label>Payment from Applicable Countries</label>
+					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+					<can_be_empty>1</can_be_empty>
+				</field>
+				<field id="sort_order" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+					<label>Sort Order</label>
+				</field>
+				<field id="instructions" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label" type="textarea">
+					<label>Instructions</label>
+				</field>
+			</group>
+        </section>
+    </system>
+</config>
